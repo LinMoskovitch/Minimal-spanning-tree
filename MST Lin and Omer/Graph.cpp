@@ -60,3 +60,25 @@ void Graph::RemoveEdge(Vertex u, Vertex v)
 	this->verteciesArray.at(u).neighbors.DeleteNode(v);
 	this->verteciesArray.at(v).neighbors.DeleteNode(u);
 }
+
+string Graph::GetVisualGraph()
+{
+	string graph = "";
+	int i = 1;
+	for (ListPair pair : verteciesArray)
+	{
+		graph.append(i + ": ");
+		ListNode* curr = pair.neighbors.GetHead();
+		if (curr != nullptr) {
+			graph.append(curr->vertex + "");
+			curr = curr->next;
+		}
+		while (curr != nullptr)
+		{
+			graph.append(" ->" + curr->vertex);
+			curr = curr->next;
+		}
+		graph.append("\n")
+		i++;
+	}
+}
