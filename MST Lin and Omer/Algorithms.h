@@ -1,5 +1,5 @@
 #pragma once
-#include "MinHeap.h"
+#include "DisjointSets.h"
 class Algorithms
 {
 public:
