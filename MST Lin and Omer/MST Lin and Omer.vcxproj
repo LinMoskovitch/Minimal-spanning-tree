@@ -139,12 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Algorithms.h" />
+    <ClInclude Include="DisjointSets.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="MinHeap.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Algorithms.cpp" />
+    <ClCompile Include="DisjointSets.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />

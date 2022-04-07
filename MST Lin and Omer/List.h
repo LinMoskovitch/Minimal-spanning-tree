@@ -39,3 +39,10 @@ typedef struct ListPair
 	* positionInHeap;
 }ListPair;
 
+typedef struct Edge
+{
+	Vertex u;
+	Vertex v;
+	Weight w;
+}Edge;
+
