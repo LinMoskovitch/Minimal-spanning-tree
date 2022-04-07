@@ -13,7 +13,7 @@ class DisjointSets
 private:
 	vector<Element> A;
 
-public
+public:
 	DisjointSets(const Graph& graph);
 	void MakeSet(Vertex x);
 	Vertex Find(Vertex x);

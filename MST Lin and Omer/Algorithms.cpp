@@ -12,7 +12,7 @@ void Algorithms::QuickSort(const vector<Edge>& edgesArray, int left, int right)
 
 void Algorithms::Kruskal(Graph graph)
 {
-
+    cout << "blah";
 }
 
 void Algorithms::Prim(Graph graph)
