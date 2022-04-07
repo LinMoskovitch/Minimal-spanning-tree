@@ -12,10 +12,18 @@ void Algorithms::QuickSort(const vector<Edge>& edgesArray, int left, int right)
 
 void Algorithms::Kruskal(Graph graph)
 {
+
 }
 
 void Algorithms::Prim(Graph graph)
 {
+    MinHeap Q;
+    vector<bool> inT ={false};
+    vector<Weight> min;
+    min.reserve(graph.GetNumOfVertex());
+    min.at(0) = 0;
+
+
 }
 
 Vertex Algorithms::Partition(const vector<Edge>& edgesArray, Vertex low, Vertex high) const

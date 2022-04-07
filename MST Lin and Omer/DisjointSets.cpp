@@ -9,7 +9,7 @@ DisjointSets::DisjointSets(const Graph& graph)
 	}
 }
 
-void DisjointSets::MakeSet(Vertex x)
+void DisjointSets::MakeSet(const Vertex x)
 {
 	A.at(x).parent = x;
 	A.at(x).sizeOfThree = 1;
@@ -21,10 +21,8 @@ Vertex DisjointSets::Find(Vertex x)
 	{
 		return x;
 	}
-	else
-	{
-		return (A.at(x).parent == Find(A.at(x).parent));
-	}
+
+	return (A.at(x).parent == Find(A.at(x).parent));
 }
 
 void DisjointSets::Union(Vertex repX, Vertex repY)
