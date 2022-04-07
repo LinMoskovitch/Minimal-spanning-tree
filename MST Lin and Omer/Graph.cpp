@@ -46,6 +46,7 @@ void Graph::AddEdge(Vertex u, Vertex v, Weight w)
 
 	this->verteciesArray.at(u).neighbors.InsertToTail(v, w);
 	this->verteciesArray.at(v).neighbors.InsertToTail(u, w);
+	this->edgeArray.push_back({ u,v,w });
 }
 
 void Graph::RemoveEdge(Vertex u, Vertex v)
@@ -59,7 +60,3 @@ void Graph::RemoveEdge(Vertex u, Vertex v)
 	this->verteciesArray.at(u).neighbors.DeleteNode(v);
 	this->verteciesArray.at(v).neighbors.DeleteNode(u);
 }
-
-
-
-
