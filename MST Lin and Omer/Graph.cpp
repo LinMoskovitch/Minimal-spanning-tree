@@ -8,7 +8,10 @@ Graph::Graph(Vertex n, Edges m) : n(n), m(m)
 
 Graph::~Graph()
 {
-	//TODO
+	for (const auto &ver : this->verteciesArray)
+	{
+		delete ver.neighbors;
+	}
 }
 
 void Graph::MakeEmptyGraph()
@@ -16,7 +19,7 @@ void Graph::MakeEmptyGraph()
 	for (int i = 0; i <= n; ++i)
 	{
 		ListPair lp;
-		lp.neighbors = List();
+		lp.neighbors = new List();
 		lp.positionInHeap = nullptr;
 		this->verteciesArray.push_back(lp);
 	}
@@ -26,12 +29,12 @@ bool Graph::IsAdjacent(Vertex u, Vertex v) const
 {
 	if (!InGraph(u) || !InGraph(v))
 		return false;
-	if (verteciesArray.at(u).neighbors.IsVertexInList(v) == true)
+	if (verteciesArray.at(u).neighbors->IsVertexInList(v) == true)
 		return true;
 	return false;
 }
 
-List Graph::GetAdjList(Vertex u)
+List* Graph::GetAdjList(Vertex u)
 {
 	return this->verteciesArray.at(u).neighbors;
 }
@@ -44,8 +47,8 @@ void Graph::AddEdge(Vertex u, Vertex v, Weight w)
 		exit(1);
 	}
 
-	this->verteciesArray.at(u).neighbors.InsertToTail(v, w);
-	this->verteciesArray.at(v).neighbors.InsertToTail(u, w);
+	this->verteciesArray.at(u).neighbors->InsertToTail(v, w);
+	this->verteciesArray.at(v).neighbors->InsertToTail(u, w);
 	this->edgeArray.push_back({ u,v,w });
 }
 
@@ -57,28 +60,35 @@ void Graph::RemoveEdge(Vertex u, Vertex v)
 		exit(1);
 	}
 
-	this->verteciesArray.at(u).neighbors.DeleteNode(v);
-	this->verteciesArray.at(v).neighbors.DeleteNode(u);
+	this->verteciesArray.at(u).neighbors->DeleteNode(v);
+	this->verteciesArray.at(v).neighbors->DeleteNode(u);
 }
 
-string Graph::GetVisualGraph()
+string Graph::GetVisualGraph() const
 {
-	string graph = "";
-	int i = 1;
+	string graph;
+	int i = 0;
 	for (ListPair pair : verteciesArray)
 	{
-		graph.append(i + ": ");
-		ListNode* curr = pair.neighbors.GetHead();
+		if (i == 0)
+		{
+			
+			i++;
+			continue;
+		}
+		graph += to_string(i) + ": ";
+		ListNode* curr = pair.neighbors->GetHead();
 		if (curr != nullptr) {
-			graph.append(curr->vertex + "");
+			graph += to_string(curr->vertex) + "";
 			curr = curr->next;
 		}
 		while (curr != nullptr)
 		{
-			graph.append(" ->" + curr->vertex);
+			graph += " -> " + to_string(curr->vertex);
 			curr = curr->next;
 		}
-		graph.append("\n")
+		graph += "\n";
 		i++;
 	}
+	return graph;
 }

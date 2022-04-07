@@ -3,6 +3,7 @@
 List::~List()
 {
 	MakeEmpty();
+	
 }
 void List::MakeEmpty()
 {
@@ -67,8 +68,8 @@ bool List::IsVertexInList(Vertex v) const
 
 void List::DeleteNode(Vertex toDelete)
 {
-	if (toDelete < 0 || toDelete >= size)
-		return;
+	/*if (toDelete < 0 || toDelete >= size)
+		return;*/
 	size--;
 	ListNode* curr = head;
 	ListNode* save;
@@ -77,7 +78,7 @@ void List::DeleteNode(Vertex toDelete)
 
 	while ((curr != nullptr))
 	{
-		if (toDelete == head->vertex)
+		if (toDelete == curr->vertex)
 		{
 			if (curr == head && curr == tail)
 			{

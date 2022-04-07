@@ -1,6 +1,8 @@
 #pragma once
 #include "Utilities.h"
-#include "MinHeap.h"
+//#include "MinHeap.h"
+
+
 
 struct ListNode
 {
@@ -9,6 +11,18 @@ struct ListNode
 	ListNode* next;
 	ListNode* prev;
 };
+
+
+
+typedef struct Edge
+{
+	Vertex u;
+	Vertex v;
+	Weight w;
+}Edge;
+
+
+
 
 class List
 {
@@ -32,18 +46,13 @@ public:
 	ListNode* GetHead() const { return this->head; }
 	int GetSize() const { return size; }
 
-
+	
 };
+
 typedef struct ListPair
 {
-	List neighbors;
+	List* neighbors;
 	Pair* positionInHeap;
-}ListPair;
 
-typedef struct Edge
-{
-	Vertex u;
-	Vertex v;
-	Weight w;
-}Edge;
+}ListPair;
 

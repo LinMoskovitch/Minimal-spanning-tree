@@ -1,11 +1,7 @@
 #pragma once
 #include "Graph.h"
 
-typedef struct pair
-{
-	Weight priority;
-	string data;
-}Pair;
+
 
 class MinHeap
 {
@@ -40,5 +36,13 @@ public:
 	bool IsEmpty() const;
 	void DecreaseKey(const int node);
 };
+
+typedef struct Pair
+{
+	Weight priority;
+	string data;
+}Pair;
+
+
 
 

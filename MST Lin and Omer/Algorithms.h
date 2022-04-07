@@ -8,8 +8,8 @@ public:
 	static void Prim(Graph graph);
 
 private:
-	Vertex Partition(const vector<Edge>& edgesArray, Vertex low, Vertex high) const;
-	static void Swap(Edge i, Edge j);
+	Vertex Partition(const vector<Edge>& edgesArray, Vertex low, Vertex high);
+	//void MySwap(Edge i, Edge j);
 
 };
 

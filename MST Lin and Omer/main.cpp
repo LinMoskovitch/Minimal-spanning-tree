@@ -4,33 +4,35 @@
 
 void main(int argc, vector<string> argv)
 {
-	
+
 	int n, m;
 	Vertex i, j;
 	Weight w;
-	cout << "Please enter number of vertecies :";
+	cout << "Please enter number of vertecies : ";
 	cin >> n;
 
-	cout << "Please enter number of edges :";
+	cout << "Please enter number of edges : ";
 	cin >> m;
 	Graph weightedGraph(n, m);
 
-	cout << "Enter trees of edges and weights :";
-	for (int k = 0; k < n; ++k)
+	cout << "Enter trees of edges and weights : ";
+	for (int k = 0; k < m; ++k)
 	{
 		cin >> i;
 		cin >> j;
 		cin >> w;
 		weightedGraph.AddEdge(i, j, w);
 	}
-	cout << weightedGraph.GetVisualGraph();
-	cout << "Enter the edge you would like to remove :";
+	/*cout << weightedGraph.GetVisualGraph();
+	cout << "Enter the edge you would like to remove : ";
 	cin >> i;
 	cin >> j;
 	cout << weightedGraph.GetVisualGraph();
-	/*cout << "Kruskal weight :" << Algorithms::Kruskal(weightedGraph);
-	cout << "Prim weight :" << Algorithms::Prim(weightedGraph);
+	Algorithms::Kruskal(weightedGraph);
+	Algorithms::Prim(weightedGraph);
 	weightedGraph.RemoveEdge(i, j);
-	cout << "Kruskal weight after removing edge :" << Algorithms::Kruskal(weightedGraph);*/
-	
+	cout << "Kruskal's weight after removing edge ( " << i << " , " << j << " )" << endl;
+	weightedGraph.RemoveEdge(i, j);
+	Algorithms::Kruskal(weightedGraph);*/
+
 }
