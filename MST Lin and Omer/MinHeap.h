@@ -3,7 +3,7 @@
 
 typedef struct pair
 {
-	int priority;
+	Weight priority;
 	string data;
 }Pair;
 
@@ -33,13 +33,12 @@ public:
 
 	void Insert(const Pair& item);
 	void BuildHeap(vector<Pair> A, int n);
-	void BuildHeapFromGraph(Graph& graph);
+	void BuildHeapFromGraph(Graph& graph, Vertex startPoint);
 	void SetHeapSize(int newHeapSize);
 	int GetHeapSize() const;
 	void MakeEmpty();
 	bool IsEmpty() const;
-	void DecreaseKey(int place, Weight newKey);
-
+	void DecreaseKey(const int node);
 };
 
 

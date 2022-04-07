@@ -33,7 +33,6 @@ void MinHeap::FixHeap(const int node)
 	int min;
 	const int left = Left(node);
 	const int right = Right(node);
-	const int parent = Parent(node);
 
 	if (left < heapSize && dataArr.at(left).priority < dataArr.at(node).priority)
 		min = left;
@@ -46,14 +45,6 @@ void MinHeap::FixHeap(const int node)
 	{
 		swap(dataArr.at(node), dataArr.at(min));
 		FixHeap(min);
-	}
-	else
-	{
-		while (node != 0 && dataArr.at(node).priority < dataArr.at(parent).priority)
-		{
-			swap(dataArr.at(node), dataArr.at(parent));
-			FixHeap(parent);
-		}
 	}
 }
 
@@ -116,17 +107,13 @@ bool MinHeap::IsEmpty() const
 	return heapSize == 0;
 }
 
-void MinHeap::DecreaseKey(int place, Weight newKey)
+void MinHeap::DecreaseKey(const int node)
 {
-	Data[places[place - 1]].priority = newKey;
-	int curr = places[place - 1];
-	Node replace1, replace2;
-	while ((curr > 0) && ((Data[Parent(curr)].priority > Data[curr].priority) || (Data[Parent(curr)].priority == INF)))
+	const int parent = Parent(node);
+
+	while (node != 0 && dataArr.at(node).priority < dataArr.at(parent).priority)
 	{
-		replace1 = Data[Parent(curr)];
-		replace2 = Data[curr];
-		std::swap(Data[Parent(curr)], Data[curr]);
-		std::swap(places[replace1.data - 1], places[replace2.data - 1]);
-		curr = Parent(curr);
+		swap(dataArr.at(node), dataArr.at(parent));
+		FixHeap(parent);
 	}
 }
