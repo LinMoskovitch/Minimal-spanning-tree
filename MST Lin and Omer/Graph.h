@@ -9,6 +9,7 @@ private:
 	int n;  //Number of vertecies
 	int m;  //Number of edges
 	vector<ListPair> verteciesArray;
+	vector<Edge> edgeArray;
 
 
 public:
@@ -21,12 +22,11 @@ public:
 	List GetAdjList(Vertex u);
 	void AddEdge(Vertex u, Vertex v, Weight w);
 	void RemoveEdge(Vertex u, Vertex v);
-	void IsWeightInt(Weight w);
 
 	int GetNumOfVertex() const { return n; }
 	int GetNumOfEdges() const { return m; }
 	vector<ListPair>& getVerteciesArray() { return verteciesArray; }
-
+	string GetVisualGraph();
 	bool InGraph(Vertex v) const { return ((v <= n) && (v >= 1)); }
 
 };

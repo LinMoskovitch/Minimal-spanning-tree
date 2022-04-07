@@ -1,5 +1,6 @@
 #pragma once
 #include "Utilities.h"
+#include "MinHeap.h"
 
 struct ListNode
 {
@@ -36,7 +37,7 @@ public:
 typedef struct ListPair
 {
 	List neighbors;
-	* positionInHeap;
+	Pair* positionInHeap;
 }ListPair;
 
 typedef struct Edge
