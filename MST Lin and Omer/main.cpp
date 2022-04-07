@@ -23,11 +23,11 @@ void main(int argc, vector<string> argv)
 		cin >> w;
 		weightedGraph.AddEdge(i, j, w);
 	}
-	cout << weightedGraph.getVisualGraph();
+	cout << weightedGraph.GetVisualGraph();
 	cout << "Enter the edge you would like to remove :";
 	cin >> i;
 	cin >> j;
-	cout << weightedGraph.getVisualGraph();
+	cout << weightedGraph.GetVisualGraph();
 	/*cout << "Kruskal weight :" << Algorithms::Kruskal(weightedGraph);
 	cout << "Prim weight :" << Algorithms::Prim(weightedGraph);
 	weightedGraph.RemoveEdge(i, j);
