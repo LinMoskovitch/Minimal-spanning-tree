@@ -23,8 +23,11 @@ void main(int argc, vector<string> argv)
 		cin >> w;
 		weightedGraph.AddEdge(i, j, w);
 	}
-	/*cout << weightedGraph.GetVisualGraph();
-	cout << "Enter the edge you would like to remove : ";
+	cout << weightedGraph.GetVisualGraph();
+	MinHeap heap(weightedGraph, 3);
+	Pair p1 = heap.DeleteMin();
+	std::cout << "check";
+	/*cout << "Enter the edge you would like to remove : ";
 	cin >> i;
 	cin >> j;
 	cout << weightedGraph.GetVisualGraph();

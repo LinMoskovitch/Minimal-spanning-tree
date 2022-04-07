@@ -9,8 +9,7 @@ class MinHeap
 private:
 
 	vector<Pair> dataArr;
-	int maxSize;
-	int heapSize;
+	
 
 	static int Left(int node) { return 2 * node + 1; }
 	static int Right(int node) { return 2 * node + 2; }
@@ -20,8 +19,9 @@ private:
 
 public:
 
-	MinHeap();
-	~MinHeap();
+	MinHeap() = default;
+	MinHeap(Graph& graph, Vertex startPoint);
+	~MinHeap() = default;
 
 	Pair Min();
 	Pair DeleteMin();
@@ -29,8 +29,6 @@ public:
 
 	void Insert(const Pair& item);
 	void BuildHeap(vector<Pair> A, int n);
-	void BuildHeapFromGraph(Graph& graph, Vertex startPoint);
-	void SetHeapSize(int newHeapSize);
 	int GetHeapSize() const;
 	void MakeEmpty();
 	bool IsEmpty() const;
@@ -41,6 +39,7 @@ typedef struct Pair
 {
 	Weight priority;
 	string data;
+	int location;
 }Pair;
 
 

@@ -1,16 +1,34 @@
 #include "MinHeap.h"
 
-MinHeap::MinHeap()
+
+
+MinHeap::MinHeap(Graph& graph, Vertex startPoint)
 {
+	Pair pair;
+	pair.data = startPoint;
+	pair.priority = 0;
+	pair.location = 0;
+	dataArr.push_back(pair);
+	*(graph.getVerteciesArray().at(startPoint).positionInHeap) = dataArr.at(0).location;
+	for (int i = 1; i <= graph.GetNumOfVertex(); i++)
+	{
+		if (i == startPoint)
+			continue;
+		
+
+		pair.priority = INT32_MAX;
+		pair.data = i;
+		pair.location = GetHeapSize();
+		dataArr.push_back(pair);
+		*(graph.getVerteciesArray().at(i).positionInHeap) = dataArr.back().location;
+	}
 }
 
-MinHeap::~MinHeap()
-{
-}
+
 
 Pair MinHeap::Min()
 {
-	if (heapSize < 1)
+	if (GetHeapSize() < 1)
 	{
 		cout << "Wrong input";
 		exit(1);
@@ -20,9 +38,10 @@ Pair MinHeap::Min()
 
 Pair MinHeap::DeleteMin()
 {
+	dataArr.at(0).location = -1;
 	Pair tmp = dataArr.at(0);
-	heapSize--;
-	dataArr.at(0) = dataArr.at(heapSize);
+	dataArr.at(0) = dataArr.back();
+	dataArr.pop_back();
 	FixHeap(0);
 	return tmp;
 }
@@ -34,23 +53,23 @@ void MinHeap::FixHeap(const int node)
 	const int left = Left(node);
 	const int right = Right(node);
 
-	if (left < heapSize && dataArr.at(left).priority < dataArr.at(node).priority)
+	if (left < GetHeapSize() && dataArr.at(left).priority < dataArr.at(node).priority)
 		min = left;
 	else
 		min = node;
-	if (right < heapSize && dataArr.at(right).priority < dataArr.at(min).priority)
+	if (right < GetHeapSize() && dataArr.at(right).priority < dataArr.at(min).priority)
 		min = right;
 
 	if (min != node)
 	{
 		swap(dataArr.at(node), dataArr.at(min));
+		swap(dataArr.at(node).location, dataArr.at(min).location);
 		FixHeap(min);
 	}
 }
 
 void MinHeap::Insert(const Pair& item)
 {
-	heapSize++;
 	int i = dataArr.size();
 	dataArr.push_back(item);
 	while (i > 0 && dataArr.at(Parent(i)).priority > item.priority)
@@ -63,7 +82,7 @@ void MinHeap::Insert(const Pair& item)
 
 void MinHeap::BuildHeap(vector<Pair> A, int n)
 {
-	heapSize = maxSize = n;
+	
 	dataArr = A;
 	for (int i = n / 2 - 1; i >= 0; --i)
 	{
@@ -71,40 +90,19 @@ void MinHeap::BuildHeap(vector<Pair> A, int n)
 	}
 }
 
-void MinHeap::BuildHeapFromGraph(Graph& graph,Vertex startPoint)
-{
-	heapSize = graph.GetNumOfVertex();
-	for(int i = 1; i <= heapSize; i++)
-	{
-		Pair pair;
-		pair.data = i;
-		if (i == startPoint)
-			pair.priority = 0;
-		else
-			pair.priority = INFINITY;
-		dataArr.push_back(pair);
-		graph.getVerteciesArray().at(i).positionInHeap = &pair;
-	}
-}
-
-void MinHeap::SetHeapSize(int newHeapSize)
-{
-	this->heapSize = newHeapSize;
-}
-
 int MinHeap::GetHeapSize() const
 {
-	return heapSize;
+	return dataArr.size();
 }
 
 void MinHeap::MakeEmpty()
 {
-	this->heapSize = 0;
+	dataArr.resize(0);
 }
 
 bool MinHeap::IsEmpty() const
 {
-	return heapSize == 0;
+	return dataArr.empty();
 }
 
 void MinHeap::DecreaseKey(const int node)
@@ -114,6 +112,7 @@ void MinHeap::DecreaseKey(const int node)
 	while (node != 0 && dataArr.at(node).priority < dataArr.at(parent).priority)
 	{
 		swap(dataArr.at(node), dataArr.at(parent));
+		swap(dataArr.at(node).location, dataArr.at(parent).location);
 		FixHeap(parent);
 	}
 }

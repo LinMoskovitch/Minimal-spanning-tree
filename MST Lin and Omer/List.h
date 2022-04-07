@@ -52,7 +52,7 @@ public:
 typedef struct ListPair
 {
 	List* neighbors;
-	Pair* positionInHeap;
+	int* positionInHeap;
 
 }ListPair;
 

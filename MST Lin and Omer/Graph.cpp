@@ -8,9 +8,10 @@ Graph::Graph(Vertex n, Edges m) : n(n), m(m)
 
 Graph::~Graph()
 {
-	for (const auto &ver : this->verteciesArray)
+	for (const auto &lp : this->verteciesArray)
 	{
-		delete ver.neighbors;
+		delete lp.neighbors;
+		delete lp.positionInHeap;
 	}
 }
 
@@ -20,7 +21,7 @@ void Graph::MakeEmptyGraph()
 	{
 		ListPair lp;
 		lp.neighbors = new List();
-		lp.positionInHeap = nullptr;
+		lp.positionInHeap = new int;
 		this->verteciesArray.push_back(lp);
 	}
 }
