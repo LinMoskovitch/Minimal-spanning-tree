@@ -15,7 +15,7 @@ void main(int argc, vector<string> argv)
 	cin >> m;
 	Graph weightedGraph(n, m);
 
-	cout << "Enter trees of edges and weights : ";
+	cout << "Enter triplets of edges and weights : ";
 	for (int k = 0; k < m; ++k)
 	{
 		cin >> i;
@@ -25,7 +25,7 @@ void main(int argc, vector<string> argv)
 	}
 	cout << weightedGraph.GetVisualGraph();
 	MinHeap heap(weightedGraph, 3);
-	Pair p1 = heap.DeleteMin();
+	HeapNode p1 = heap.DeleteMin();
 	std::cout << "check";
 	/*cout << "Enter the edge you would like to remove : ";
 	cin >> i;

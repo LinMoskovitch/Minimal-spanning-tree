@@ -1,21 +1,21 @@
 #pragma once
 #include "Graph.h"
 
-
+typedef struct HeapNode
+{
+	int length_from_tree;
+	int vertex_name;
+	int location;
+}HeapNode;
 
 class MinHeap
 {
-
 private:
-
-	vector<Pair> dataArr;
+	vector<HeapNode> dataArr;
 	
-
 	static int Left(int node) { return 2 * node + 1; }
 	static int Right(int node) { return 2 * node + 2; }
 	static int Parent(int node) { return (node - 1) / 2; }
-
-	
 
 public:
 
@@ -23,25 +23,14 @@ public:
 	MinHeap(Graph& graph, Vertex startPoint);
 	~MinHeap() = default;
 
-	Pair Min();
-	Pair DeleteMin();
+	HeapNode Min();
+	HeapNode DeleteMin();
 	void FixHeap(int node);
 
-	void Insert(const Pair& item);
-	void BuildHeap(vector<Pair> A, int n);
+	void Insert(const HeapNode& item);
+	void BuildHeap(vector<HeapNode> A, int n);
 	int GetHeapSize() const;
 	void MakeEmpty();
 	bool IsEmpty() const;
 	void DecreaseKey(const int node);
 };
-
-typedef struct Pair
-{
-	Weight priority;
-	string data;
-	int location;
-}Pair;
-
-
-
-

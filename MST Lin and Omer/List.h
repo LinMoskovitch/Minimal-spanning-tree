@@ -6,23 +6,11 @@
 
 struct ListNode
 {
-	Vertex vertex;
-	Weight weight;
+	int vertex_name;
+	int weight;
 	ListNode* next;
 	ListNode* prev;
 };
-
-
-
-typedef struct Edge
-{
-	Vertex u;
-	Vertex v;
-	Weight w;
-}Edge;
-
-
-
 
 class List
 {
@@ -46,13 +34,4 @@ public:
 	ListNode* GetHead() const { return this->head; }
 	int GetSize() const { return size; }
 
-	
 };
-
-typedef struct ListPair
-{
-	List* neighbors;
-	int* positionInHeap;
-
-}ListPair;
-

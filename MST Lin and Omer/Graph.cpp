@@ -8,10 +8,10 @@ Graph::Graph(Vertex n, Edges m) : n(n), m(m)
 
 Graph::~Graph()
 {
-	for (const auto &lp : this->verteciesArray)
+	for (GraphVertex vertex : verteciesArray)
 	{
-		delete lp.neighbors;
-		delete lp.positionInHeap;
+		delete vertex.neighbors;
+		delete vertex.positionInHeap;
 	}
 }
 
@@ -19,10 +19,10 @@ void Graph::MakeEmptyGraph()
 {
 	for (int i = 0; i <= n; ++i)
 	{
-		ListPair lp;
-		lp.neighbors = new List();
-		lp.positionInHeap = new int;
-		this->verteciesArray.push_back(lp);
+		GraphVertex newVertex;
+		newVertex.neighbors = new List();
+		newVertex.positionInHeap = new int;
+		verteciesArray.push_back(newVertex);
 	}
 }
 
@@ -63,29 +63,31 @@ void Graph::RemoveEdge(Vertex u, Vertex v)
 
 	this->verteciesArray.at(u).neighbors->DeleteNode(v);
 	this->verteciesArray.at(v).neighbors->DeleteNode(u);
+	edgeArray.erase(remove_if(edgeArray.begin(), edgeArray.end(), [u, v](Edge edge) {
+		return (edge.first_vertex == u && edge.second_vertex == v) ||
+			(edge.first_vertex == v && edge.second_vertex == u);}), edgeArray.end());
 }
 
 string Graph::GetVisualGraph() const
 {
 	string graph;
 	int i = 0;
-	for (ListPair pair : verteciesArray)
+	for (GraphVertex vertex : verteciesArray)
 	{
 		if (i == 0)
 		{
-			
 			i++;
 			continue;
 		}
 		graph += to_string(i) + ": ";
-		ListNode* curr = pair.neighbors->GetHead();
+		ListNode* curr = vertex.neighbors->GetHead();
 		if (curr != nullptr) {
-			graph += to_string(curr->vertex) + "";
+			graph += to_string(curr->vertex_name) + "";
 			curr = curr->next;
 		}
 		while (curr != nullptr)
 		{
-			graph += " -> " + to_string(curr->vertex);
+			graph += " -> " + to_string(curr->vertex_name);
 			curr = curr->next;
 		}
 		graph += "\n";

@@ -4,9 +4,9 @@
 
 MinHeap::MinHeap(Graph& graph, Vertex startPoint)
 {
-	Pair pair;
-	pair.data = startPoint;
-	pair.priority = 0;
+	HeapNode pair;
+	pair.vertex_name = startPoint;
+	pair.length_from_tree = 0;
 	pair.location = 0;
 	dataArr.push_back(pair);
 	*(graph.getVerteciesArray().at(startPoint).positionInHeap) = dataArr.at(0).location;
@@ -16,8 +16,8 @@ MinHeap::MinHeap(Graph& graph, Vertex startPoint)
 			continue;
 		
 
-		pair.priority = INT32_MAX;
-		pair.data = i;
+		pair.length_from_tree = INT32_MAX;
+		pair.vertex_name = i;
 		pair.location = GetHeapSize();
 		dataArr.push_back(pair);
 		*(graph.getVerteciesArray().at(i).positionInHeap) = dataArr.back().location;
@@ -26,7 +26,7 @@ MinHeap::MinHeap(Graph& graph, Vertex startPoint)
 
 
 
-Pair MinHeap::Min()
+HeapNode MinHeap::Min()
 {
 	if (GetHeapSize() < 1)
 	{
@@ -36,10 +36,10 @@ Pair MinHeap::Min()
 	return dataArr.at(0);
 }
 
-Pair MinHeap::DeleteMin()
+HeapNode MinHeap::DeleteMin()
 {
 	dataArr.at(0).location = -1;
-	Pair tmp = dataArr.at(0);
+	HeapNode tmp = dataArr.at(0);
 	dataArr.at(0) = dataArr.back();
 	dataArr.pop_back();
 	FixHeap(0);
@@ -53,11 +53,11 @@ void MinHeap::FixHeap(const int node)
 	const int left = Left(node);
 	const int right = Right(node);
 
-	if (left < GetHeapSize() && dataArr.at(left).priority < dataArr.at(node).priority)
+	if (left < GetHeapSize() && dataArr.at(left).length_from_tree < dataArr.at(node).length_from_tree)
 		min = left;
 	else
 		min = node;
-	if (right < GetHeapSize() && dataArr.at(right).priority < dataArr.at(min).priority)
+	if (right < GetHeapSize() && dataArr.at(right).length_from_tree < dataArr.at(min).length_from_tree)
 		min = right;
 
 	if (min != node)
@@ -68,11 +68,11 @@ void MinHeap::FixHeap(const int node)
 	}
 }
 
-void MinHeap::Insert(const Pair& item)
+void MinHeap::Insert(const HeapNode& item)
 {
 	int i = dataArr.size();
 	dataArr.push_back(item);
-	while (i > 0 && dataArr.at(Parent(i)).priority > item.priority)
+	while (i > 0 && dataArr.at(Parent(i)).length_from_tree > item.length_from_tree)
 	{
 		dataArr.at(i) = dataArr.at(Parent(i));
 		i = Parent(i);
@@ -80,7 +80,7 @@ void MinHeap::Insert(const Pair& item)
 	dataArr.at(i) = item;
 }
 
-void MinHeap::BuildHeap(vector<Pair> A, int n)
+void MinHeap::BuildHeap(vector<HeapNode> A, int n)
 {
 	
 	dataArr = A;
@@ -109,7 +109,7 @@ void MinHeap::DecreaseKey(const int node)
 {
 	const int parent = Parent(node);
 
-	while (node != 0 && dataArr.at(node).priority < dataArr.at(parent).priority)
+	while (node != 0 && dataArr.at(node).length_from_tree < dataArr.at(parent).length_from_tree)
 	{
 		swap(dataArr.at(node), dataArr.at(parent));
 		swap(dataArr.at(node).location, dataArr.at(parent).location);

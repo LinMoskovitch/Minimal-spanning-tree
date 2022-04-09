@@ -28,13 +28,13 @@ void Algorithms::Prim(Graph graph)
 
 Vertex Algorithms::Partition(const vector<Edge>& edgesArray, Vertex low, Vertex high)
 {
-	const Weight pivot = edgesArray.at(high).w; 
+	const Weight pivot = edgesArray.at(high).weight; 
     Vertex i = (low - 1);
 
     for (Vertex j = low; j <= high - 1; j++)
     {
         
-        if (edgesArray.at(j).w < pivot)
+        if (edgesArray.at(j).weight < pivot)
         {
             i++;
             //swap(edgesArray.at(i), edgesArray.at(j));

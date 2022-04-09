@@ -48,7 +48,7 @@ void List::PrintList() const
 	ListNode* curr = head;
 	while (curr != nullptr)
 	{
-		cout << "(" << curr->vertex << ", " << curr->weight << ") -> ";
+		cout << "(" << curr->vertex_name << ", " << curr->weight << ") -> ";
 		curr = curr->next;
 	}
 	cout << "//" << endl;
@@ -59,7 +59,7 @@ bool List::IsVertexInList(Vertex v) const
 	ListNode* currentNode = head;
 	while (currentNode != nullptr)
 	{
-		if (currentNode->vertex == v)
+		if (currentNode->vertex_name == v)
 			return true;
 		currentNode = currentNode->next;
 	}
@@ -78,7 +78,7 @@ void List::DeleteNode(Vertex toDelete)
 
 	while ((curr != nullptr))
 	{
-		if (toDelete == curr->vertex)
+		if (toDelete == curr->vertex_name)
 		{
 			if (curr == head && curr == tail)
 			{
