@@ -11,7 +11,8 @@ Graph::~Graph()
 	for (GraphVertex vertex : verteciesArray)
 	{
 		delete vertex.neighbors;
-		delete vertex.positionInHeap;
+		if (vertex.location_in_heap)
+			delete vertex.location_in_heap;
 	}
 }
 
@@ -21,7 +22,7 @@ void Graph::MakeEmptyGraph()
 	{
 		GraphVertex newVertex;
 		newVertex.neighbors = new List();
-		newVertex.positionInHeap = new int;
+		newVertex.location_in_heap = nullptr;
 		verteciesArray.push_back(newVertex);
 	}
 }

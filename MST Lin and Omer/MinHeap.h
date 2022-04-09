@@ -5,7 +5,7 @@ typedef struct HeapNode
 {
 	int length_from_tree;
 	int vertex_name;
-	int location;
+	int* location;
 }HeapNode;
 
 class MinHeap

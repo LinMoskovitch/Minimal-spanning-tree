@@ -1,7 +1,5 @@
 #include "Algorithms.h"
 
-
-
 void main(int argc, vector<string> argv)
 {
 

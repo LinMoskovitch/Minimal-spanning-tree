@@ -1,10 +1,11 @@
 #pragma once
 #include "List.h"
 
+
 typedef struct GraphVertex
 {
 	List* neighbors;
-	int* positionInHeap;
+	int* location_in_heap;
 }GraphVertex;
 
 typedef struct Edge

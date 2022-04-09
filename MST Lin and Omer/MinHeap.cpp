@@ -1,30 +1,28 @@
 #include "MinHeap.h"
 
-
-
 MinHeap::MinHeap(Graph& graph, Vertex startPoint)
 {
-	HeapNode pair;
-	pair.vertex_name = startPoint;
-	pair.length_from_tree = 0;
-	pair.location = 0;
-	dataArr.push_back(pair);
-	*(graph.getVerteciesArray().at(startPoint).positionInHeap) = dataArr.at(0).location;
+	HeapNode heap_node;
+	heap_node.vertex_name = startPoint;
+	heap_node.length_from_tree = 0;
+	heap_node.location = new int;
+	*(heap_node.location) = 0;
+	dataArr.push_back(heap_node);
+	graph.getVerteciesArray().at(startPoint).location_in_heap = dataArr.back().location;
 	for (int i = 1; i <= graph.GetNumOfVertex(); i++)
 	{
 		if (i == startPoint)
 			continue;
-		
 
-		pair.length_from_tree = INT32_MAX;
-		pair.vertex_name = i;
-		pair.location = GetHeapSize();
-		dataArr.push_back(pair);
-		*(graph.getVerteciesArray().at(i).positionInHeap) = dataArr.back().location;
+		heap_node.length_from_tree = INT32_MAX;
+		heap_node.vertex_name = i;
+		heap_node.location = new int;
+		*(heap_node.location) = dataArr.size();
+		dataArr.push_back(heap_node);
+		graph.getVerteciesArray().at(i).location_in_heap = dataArr.back().location;
 	}
+
 }
-
-
 
 HeapNode MinHeap::Min()
 {
@@ -38,14 +36,16 @@ HeapNode MinHeap::Min()
 
 HeapNode MinHeap::DeleteMin()
 {
-	dataArr.at(0).location = -1;
-	HeapNode tmp = dataArr.at(0);
-	dataArr.at(0) = dataArr.back();
+	swap(dataArr.at(0), dataArr.back());
+	swap(*(dataArr.at(0).location), *(dataArr.back().location));
+
+	*(dataArr.back().location) = -1;
+
+	HeapNode tmp = dataArr.back();
 	dataArr.pop_back();
 	FixHeap(0);
 	return tmp;
 }
-
 
 void MinHeap::FixHeap(const int node)
 {
@@ -63,7 +63,7 @@ void MinHeap::FixHeap(const int node)
 	if (min != node)
 	{
 		swap(dataArr.at(node), dataArr.at(min));
-		swap(dataArr.at(node).location, dataArr.at(min).location);
+		swap(*(dataArr.at(node).location), *(dataArr.at(min).location));
 		FixHeap(min);
 	}
 }
@@ -112,7 +112,7 @@ void MinHeap::DecreaseKey(const int node)
 	while (node != 0 && dataArr.at(node).length_from_tree < dataArr.at(parent).length_from_tree)
 	{
 		swap(dataArr.at(node), dataArr.at(parent));
-		swap(dataArr.at(node).location, dataArr.at(parent).location);
-		FixHeap(parent);
+		swap(*(dataArr.at(node).location), *(dataArr.at(parent).location));
+		DecreaseKey(parent);
 	}
 }
