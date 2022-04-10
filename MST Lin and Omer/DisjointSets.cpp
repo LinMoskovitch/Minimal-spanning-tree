@@ -2,6 +2,8 @@
 
 DisjointSets::DisjointSets(const Graph& graph)
 {
+	A.reserve(graph.GetNumOfVertex());
+
 	for (int i = 0; i < graph.GetNumOfVertex(); ++i)
 	{
 		A.at(i).parent = -1;

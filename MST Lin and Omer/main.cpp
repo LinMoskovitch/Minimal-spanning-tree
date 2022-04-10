@@ -2,6 +2,7 @@
 
 void main(int argc, vector<string> argv)
 {
+	//Graph weightedGraph = getGraphFromFile(argv.at(1));
 
 	int n, m;
 	Vertex i, j;

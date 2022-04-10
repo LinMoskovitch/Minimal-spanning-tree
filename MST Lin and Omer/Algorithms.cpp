@@ -10,9 +10,27 @@ void Algorithms::QuickSort(const vector<Edge>& edgesArray, int left, int right)
     }
 }
 
-void Algorithms::Kruskal(Graph graph)
+vector<Edge> Algorithms::Kruskal(Graph& graph)
 {
-    cout << "blah";
+    vector<Edge> edgeSet;
+    DisjointSets UF(graph);
+    QuickSort(edgeSet, 0, edgeSet.size() - 1);
+    for (int i = 0; i < graph.GetNumOfVertex(); ++i)
+    {
+        UF.MakeSet(i);
+    }
+    for(const Edge edge : edgeSet)
+    {
+        Vertex uTmp = UF.Find(edge.first_vertex);
+        Vertex vTmp = UF.Find(edge.second_vertex);
+
+        if (uTmp != vTmp)
+        {
+            edgeSet.push_back(edge);
+            UF.Union(edge.first_vertex, edge.second_vertex);
+        }
+    }
+    return edgeSet;
 }
 
 void Algorithms::Prim(Graph graph)
@@ -26,6 +44,11 @@ void Algorithms::Prim(Graph graph)
 
 }
 
+Graph Algorithms::getGraphFromFile(string fileName)
+{
+    return Graph(1,3);
+}
+
 Vertex Algorithms::Partition(const vector<Edge>& edgesArray, Vertex low, Vertex high)
 {
 	const Weight pivot = edgesArray.at(high).weight; 
@@ -37,17 +60,9 @@ Vertex Algorithms::Partition(const vector<Edge>& edgesArray, Vertex low, Vertex 
         if (edgesArray.at(j).weight < pivot)
         {
             i++;
-            //swap(edgesArray.at(i), edgesArray.at(j));
+            swap(edgesArray.at(i), edgesArray.at(j));
         }
     }
-    //Algorithms::swap(edgesArray.at(i+1), edgesArray.at(high));
+    swap(edgesArray.at(i+1), edgesArray.at(high));
     return (i + 1);
 }
-
-//void Algorithms::MySwap(Edge i, Edge j)
-//{
-//    Edge tmp = i;
-//    i = j;
-//    j = i;
-//}
-
