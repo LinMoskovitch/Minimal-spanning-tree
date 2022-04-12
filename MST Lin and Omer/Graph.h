@@ -13,6 +13,14 @@ typedef struct Edge
 	int first_vertex;
 	int second_vertex;
 	int weight;
+
+	Edge& operator=(const Edge& a)
+	{
+		first_vertex = a.first_vertex;
+		second_vertex = a.second_vertex;
+		weight = a.weight;
+		return *this;
+	}
 }Edge;
 
 class Graph
@@ -37,6 +45,7 @@ public:
 	int GetNumOfVertex() const { return n; }
 	int GetNumOfEdges() const { return m; }
 	vector<GraphVertex>& getVerteciesArray() { return verteciesArray; }
+	vector<Edge>& getEdgeArray() { return edgeArray; }
 	string GetVisualGraph() const;
 	bool InGraph(Vertex v) const { return ((v <= n) && (v >= 1)); }
 

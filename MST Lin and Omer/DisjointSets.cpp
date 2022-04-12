@@ -2,7 +2,7 @@
 
 DisjointSets::DisjointSets(const Graph& graph)
 {
-	A.reserve(graph.GetNumOfVertex());
+	A.resize(graph.GetNumOfVertex());
 
 	for (int i = 0; i < graph.GetNumOfVertex(); ++i)
 	{

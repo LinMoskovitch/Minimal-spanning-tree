@@ -1,4 +1,5 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
@@ -6,7 +7,13 @@
 #include <vector>
 #include <iostream>
 
+
 using namespace std;
+
+#define ISNUMBER(x) ((x>='0') && (x<='9'))
+#define ISDOT(x) (x=='.')
+#define TOINT(x) (x-'0')
+
 
 typedef int Weight;      //in this program, weight is an integer
 

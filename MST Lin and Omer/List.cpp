@@ -3,7 +3,6 @@
 List::~List()
 {
 	MakeEmpty();
-	
 }
 void List::MakeEmpty()
 {
