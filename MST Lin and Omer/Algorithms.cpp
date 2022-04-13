@@ -31,6 +31,7 @@ vector<Edge> Algorithms::Kruskal(Graph& graph)
             UF.Union(uTmp, vTmp);
         }
     }
+	
     return edgeSet;
 }
 

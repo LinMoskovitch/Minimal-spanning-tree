@@ -15,10 +15,10 @@ int main(int argc, char** argv)
 
 	if (!inputFile || !outputFile)
 	{
-		cout <<"File corrupt or not found!";
+		cout << "File corrupt or not found!";
 		exit(1);
 	}
-	Graph graph(0,0);
+	Graph graph(0, 0);
 	Edge toRemove = Algorithms::GetEdgeToRemoveAndGraphFromFile(inputFile, graph);
 	inputFile.close();
 	Kruskal = Algorithms::Kruskal(graph);
@@ -27,5 +27,15 @@ int main(int argc, char** argv)
 	Algorithms::CalculateMSTWeight("Prim", Prim, outputFile);
 	graph.RemoveEdge(toRemove.first_vertex, toRemove.second_vertex);
 	Kruskal = Algorithms::Kruskal(graph);
-	Algorithms::CalculateMSTWeight("Kruskal2", Kruskal, outputFile);
+	if (Kruskal.size() < graph.GetNumOfVertex() - 1)
+	{
+		cout << "NO MST";
+		outputFile << "NO MST";
+	}
+	else
+	{
+		
+		Algorithms::CalculateMSTWeight("Kruskal2", Kruskal, outputFile);
+	}
+	outputFile.close();
 }
