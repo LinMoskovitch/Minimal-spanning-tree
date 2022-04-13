@@ -11,7 +11,6 @@
 using namespace std;
 
 #define ISNUMBER(x) ((x>='0') && (x<='9'))
-#define ISDOT(x) (x=='.')
 #define TOINT(x) (x-'0')
 
 

@@ -41,17 +41,12 @@ vector<Edge> Algorithms::Prim(Graph& graph)
 	MinHeap Q(graph, 1);
     vector<bool> inT;
 	inT.assign(graph.GetNumOfVertex() + 1, false);
-	p.resize(graph.GetNumOfVertex() + 1);
-
-	for (int i = 1; i <= graph.GetNumOfVertex(); ++i)
-	{
-		p.at(i) = -1;
-	}
+	p.assign(graph.GetNumOfVertex() + 1, -1);
 
 	while (!Q.IsEmpty())
 	{
 		HeapNode u = Q.DeleteMin();
-		if (p.at(u.vertex_name) != 1)
+		if (p.at(u.vertex_name) != -1)
 			edgeSet.push_back({ u.vertex_name,p.at(u.vertex_name),u.length_from_tree });
 		inT.at(u.vertex_name) = true;
 		const List* neighbors = graph.getVerteciesArray().at(u.vertex_name).neighbors;

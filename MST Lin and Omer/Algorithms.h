@@ -11,6 +11,7 @@ public:
 	static void GetSingleNumFromStr(const string& str, int& num);
 	static void GetEdgeFromStr(const string& str, Edge& e, bool isLastIteration);
 	static int MyAtoi(char* str);
+
 	static void CalculateMSTWeight(string name, vector<Edge> edgesArray, ofstream& outputFile);
 
 

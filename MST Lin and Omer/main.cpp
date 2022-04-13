@@ -25,8 +25,7 @@ int main(int argc, char** argv)
 	Prim = Algorithms::Prim(graph);
 	Algorithms::CalculateMSTWeight("Kruskal", Kruskal, outputFile);
 	Algorithms::CalculateMSTWeight("Prim", Prim, outputFile);
-
-	/*graph.RemoveEdge(toRemove.first_vertex, toRemove.second_vertex);
-	Algorithms::Kruskal(graph);
-	Algorithms::CalculateMSTWeight("After removing edge in Kruskal", Kruskal, outputFile);*/
+	graph.RemoveEdge(toRemove.first_vertex, toRemove.second_vertex);
+	Kruskal = Algorithms::Kruskal(graph);
+	Algorithms::CalculateMSTWeight("Kruskal2", Kruskal, outputFile);
 }
