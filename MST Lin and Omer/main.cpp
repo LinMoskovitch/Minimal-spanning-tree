@@ -15,7 +15,7 @@ int main(int argc, char** argv)
 
 	if (!inputFile || !outputFile)
 	{
-		cout <<"File currupt or not found!";
+		cout <<"File corrupt or not found!";
 		exit(1);
 	}
 	Graph graph(0,0);
