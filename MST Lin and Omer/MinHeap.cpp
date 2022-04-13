@@ -8,7 +8,7 @@ MinHeap::MinHeap(Graph& graph, Vertex startPoint)
 	heap_node.location = new int;
 	*(heap_node.location) = 0;
 	dataArr.push_back(heap_node);
-	graph.getVerteciesArray().at(startPoint).location_in_heap = dataArr.back().location;
+	graph.GetverticesArray().at(startPoint).location_in_heap = dataArr.back().location;
 	for (int i = 1; i <= graph.GetNumOfVertex(); i++)
 	{
 		if (i == startPoint)
@@ -19,7 +19,7 @@ MinHeap::MinHeap(Graph& graph, Vertex startPoint)
 		heap_node.location = new int;
 		*(heap_node.location) = dataArr.size();
 		dataArr.push_back(heap_node);
-		graph.getVerteciesArray().at(i).location_in_heap = dataArr.back().location;
+		graph.GetverticesArray().at(i).location_in_heap = dataArr.back().location;
 	}
 
 }

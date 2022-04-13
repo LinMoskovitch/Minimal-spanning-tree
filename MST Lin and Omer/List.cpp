@@ -67,8 +67,6 @@ bool List::IsVertexInList(Vertex v) const
 
 void List::DeleteNode(Vertex toDelete)
 {
-	/*if (toDelete < 0 || toDelete >= size)
-		return;*/
 	size--;
 	ListNode* curr = head;
 	ListNode* save;

@@ -30,9 +30,9 @@ typedef struct Edge
 class Graph
 {
 private:
-	int n;  //Number of vertecies
+	int n;  //Number of vertices
 	int m;  //Number of edges
-	vector<GraphVertex> verteciesArray;
+	vector<GraphVertex> verticesArray;
 	vector<Edge> edgeArray;
 
 public:
@@ -48,9 +48,9 @@ public:
 
 	int GetNumOfVertex() const { return n; }
 	int GetNumOfEdges() const { return m; }
-	vector<GraphVertex>& getVerteciesArray() { return verteciesArray; }
+	vector<GraphVertex>& GetverticesArray() { return verticesArray; }
 	vector<Edge>& getEdgeArray() { return edgeArray; }
-	string GetVisualGraph() const;
-	bool InGraph(Vertex v) const { return ((v <= n) && (v >= 1)); }
+	string GetVisualGraph() const; // A helper to print the graph as adjacency list
+	bool InGraph(Vertex v) const { return ((v <= n) && (v >= 1)); } 
 
 };

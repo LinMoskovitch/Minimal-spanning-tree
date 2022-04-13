@@ -10,30 +10,35 @@ void Algorithms::QuickSort(vector<Edge>& edgesArray, int left, int right)
     }
 }
 
-vector<Edge> Algorithms::Kruskal(Graph& graph)
+vector<Edge> Algorithms::Kruskal(Graph& graph, bool isSorted)
 {
-    vector<Edge> edgeSet;
-	vector<Edge> edgesArray = graph.getEdgeArray();
-    DisjointSets UF(graph);
-    QuickSort(edgesArray, 0, edgesArray.size() - 1);
-    for (int i = 1; i <= graph.GetNumOfVertex(); ++i)
-    {
-        UF.MakeSet(i);
-    }
-    for(const Edge edge : edgesArray)
-    {
-	    const Vertex uTmp = UF.Find(edge.first_vertex);
-	    const Vertex vTmp = UF.Find(edge.second_vertex);
+	vector<Edge> edgeSet;
+	vector<Edge>& edgesArray = graph.getEdgeArray();
+	DisjointSets UF(graph);
+	if (!isSorted)
+	{
+		QuickSort(edgesArray, 0, edgesArray.size() - 1);
+	}
 
-        if (uTmp != vTmp)
-        {
-            edgeSet.push_back(edge);
-            UF.Union(uTmp, vTmp);
-        }
-    }
-	
+	for (int i = 1; i <= graph.GetNumOfVertex(); ++i)
+	{
+		UF.MakeSet(i);
+	}
+	for (const Edge edge : edgesArray)
+	{
+		const Vertex uTmp = UF.Find(edge.first_vertex);
+		const Vertex vTmp = UF.Find(edge.second_vertex);
+
+		if (uTmp != vTmp)
+		{
+			edgeSet.push_back(edge);
+			UF.Union(uTmp, vTmp);
+		}
+	}
+
     return edgeSet;
 }
+
 
 vector<Edge> Algorithms::Prim(Graph& graph)
 {
@@ -50,11 +55,11 @@ vector<Edge> Algorithms::Prim(Graph& graph)
 		if (p.at(u.vertex_name) != -1)
 			edgeSet.push_back({ u.vertex_name,p.at(u.vertex_name),u.length_from_tree });
 		inT.at(u.vertex_name) = true;
-		const List* neighbors = graph.getVerteciesArray().at(u.vertex_name).neighbors;
+		const List* neighbors = graph.GetverticesArray().at(u.vertex_name).neighbors;
 		ListNode* curr = neighbors->GetHead();
 		while (curr != nullptr)
 		{
-			int currInHeap = *(graph.getVerteciesArray().at(curr->vertex_name).location_in_heap);
+			int currInHeap = *(graph.GetverticesArray().at(curr->vertex_name).location_in_heap);
 			if (inT.at(curr->vertex_name) == false && curr->weight < Q.GetLengthFromTree(currInHeap))
 			{
 				Q.SetLengthFromTree(currInHeap, curr->weight);
@@ -109,7 +114,7 @@ Edge Algorithms::GetEdgeToRemoveAndGraphFromFile(ifstream& is, Graph& graph)
 	Edge tmpEdge;
 	int n, m;
 	getline(is, str);
-	GetSingleNumFromStr(str, n); // number of vertecies
+	GetSingleNumFromStr(str, n); // number of vertices
 	getline(is, str);
 	GetSingleNumFromStr(str, m);	// number of edges
 	graph.MakeEmptyGraph(n,m);

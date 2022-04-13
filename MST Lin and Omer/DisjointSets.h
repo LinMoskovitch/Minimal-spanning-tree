@@ -1,6 +1,6 @@
 #pragma once
 #include "MinHeap.h"
-
+//Implemention by the book "Data Structures"
 typedef struct Element
 {
 	Vertex parent;

@@ -8,7 +8,7 @@ Graph::Graph(Vertex n, Edges m) : n(n), m(m)
 
 Graph::~Graph()
 {
-	for (GraphVertex vertex : verteciesArray)
+	for (GraphVertex vertex : verticesArray)
 	{
 		delete vertex.neighbors;
 		if (vertex.location_in_heap)
@@ -25,7 +25,7 @@ void Graph::MakeEmptyGraph(Vertex n, Edges m)
 		GraphVertex newVertex;
 		newVertex.neighbors = new List();
 		newVertex.location_in_heap = nullptr;
-		verteciesArray.push_back(newVertex);
+		verticesArray.push_back(newVertex);
 	}
 }
 
@@ -33,14 +33,14 @@ bool Graph::IsAdjacent(Vertex u, Vertex v) const
 {
 	if (!InGraph(u) || !InGraph(v))
 		return false;
-	if (verteciesArray.at(u).neighbors->IsVertexInList(v) == true)
+	if (verticesArray.at(u).neighbors->IsVertexInList(v) == true)
 		return true;
 	return false;
 }
 
 List* Graph::GetAdjList(Vertex u)
 {
-	return this->verteciesArray.at(u).neighbors;
+	return this->verticesArray.at(u).neighbors;
 }
 
 void Graph::AddEdge(Vertex u, Vertex v, Weight w)
@@ -51,8 +51,8 @@ void Graph::AddEdge(Vertex u, Vertex v, Weight w)
 		exit(1);
 	}
 
-	this->verteciesArray.at(u).neighbors->InsertToTail(v, w);
-	this->verteciesArray.at(v).neighbors->InsertToTail(u, w);
+	this->verticesArray.at(u).neighbors->InsertToTail(v, w);
+	this->verticesArray.at(v).neighbors->InsertToTail(u, w);
 	this->edgeArray.push_back({ u,v,w });
 }
 
@@ -64,8 +64,8 @@ void Graph::RemoveEdge(Vertex u, Vertex v)
 		exit(1);
 	}
 
-	this->verteciesArray.at(u).neighbors->DeleteNode(v);
-	this->verteciesArray.at(v).neighbors->DeleteNode(u);
+	this->verticesArray.at(u).neighbors->DeleteNode(v);
+	this->verticesArray.at(v).neighbors->DeleteNode(u);
 	edgeArray.erase(remove_if(edgeArray.begin(), edgeArray.end(), [u, v](Edge edge) {
 		return (edge.first_vertex == u && edge.second_vertex == v) ||
 			(edge.first_vertex == v && edge.second_vertex == u);}), edgeArray.end());
@@ -75,7 +75,7 @@ string Graph::GetVisualGraph() const
 {
 	string graph;
 	int i = 0;
-	for (const GraphVertex vertex : verteciesArray)
+	for (const GraphVertex vertex : verticesArray)
 	{
 		if (i == 0)
 		{
