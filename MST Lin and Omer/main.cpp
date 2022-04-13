@@ -19,7 +19,7 @@ int main(int argc, char** argv)
 		exit(1);
 	}
 	Graph graph(0,0);
-	Edge toRemove = Algorithms::getEdgeToRemoveAndGraphFromFile(inputFile, graph);
+	Edge toRemove = Algorithms::GetEdgeToRemoveAndGraphFromFile(inputFile, graph);
 	inputFile.close();
 	Kruskal = Algorithms::Kruskal(graph);
 	//Prim = Algorithms::Prim(graph);

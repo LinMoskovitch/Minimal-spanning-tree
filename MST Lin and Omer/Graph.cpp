@@ -75,7 +75,7 @@ string Graph::GetVisualGraph() const
 {
 	string graph;
 	int i = 0;
-	for (GraphVertex vertex : verteciesArray)
+	for (const GraphVertex vertex : verteciesArray)
 	{
 		if (i == 0)
 		{

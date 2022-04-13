@@ -22,8 +22,8 @@ vector<Edge> Algorithms::Kruskal(Graph& graph)
     }
     for(const Edge edge : edgesArray)
     {
-        Vertex uTmp = UF.Find(edge.first_vertex);
-        Vertex vTmp = UF.Find(edge.second_vertex);
+	    const Vertex uTmp = UF.Find(edge.first_vertex);
+	    const Vertex vTmp = UF.Find(edge.second_vertex);
 
         if (uTmp != vTmp)
         {
@@ -38,15 +38,15 @@ vector<Edge> Algorithms::Prim(Graph graph)
 {
 	vector<Edge> weights;
 	Edge tmp;
-	tmp.first_vertex = 4;
-	tmp.second_vertex = 5;
-	tmp.weight = 6;
     MinHeap Q;
     vector<bool> inT ={false};
     vector<Weight> min;
-    min.reserve(graph.GetNumOfVertex());
+
+    min.resize(graph.GetNumOfVertex());
     min.at(0) = 0;
 	weights.push_back(tmp);
+
+
 	return weights;
 }
 
@@ -86,21 +86,21 @@ void Algorithms::edgeSwap(Edge& src, Edge& dest)
 	src = dest;
 	dest = tmp;
 }
-Edge Algorithms::getEdgeToRemoveAndGraphFromFile(ifstream& is, Graph& graph)
+Edge Algorithms::GetEdgeToRemoveAndGraphFromFile(ifstream& is, Graph& graph)
 {
 	string str;
 	Edge tmpEdge;
 	int n, m;
 	getline(is, str);
-	getSingleNumFromStr(str, n); // number of vertecies
+	GetSingleNumFromStr(str, n); // number of vertecies
 	getline(is, str);
-	getSingleNumFromStr(str, m);	// number of edges
+	GetSingleNumFromStr(str, m);	// number of edges
 	graph.MakeEmptyGraph(n,m);
 	bool isLastIteration = false;
 	for (int i = 0; i < m; ++i)
 	{
 		getline(is, str);
-		getEdgeFromStr(str, tmpEdge, isLastIteration);
+		GetEdgeFromStr(str, tmpEdge, isLastIteration);
 		if (tmpEdge.first_vertex == tmpEdge.second_vertex)
 		{
 			cout << "Invalid edge!";
@@ -113,7 +113,7 @@ Edge Algorithms::getEdgeToRemoveAndGraphFromFile(ifstream& is, Graph& graph)
 	// get the edge to remove
 	isLastIteration = true;
 	getline(is, str);
-	getEdgeFromStr(str, tmpEdge, isLastIteration);
+	GetEdgeFromStr(str, tmpEdge, isLastIteration);
 
 	if (!graph.IsAdjacent(tmpEdge.first_vertex, tmpEdge.second_vertex))
 	{
@@ -124,7 +124,7 @@ Edge Algorithms::getEdgeToRemoveAndGraphFromFile(ifstream& is, Graph& graph)
 	return {tmpEdge.first_vertex, tmpEdge.second_vertex, 0};
 }
 
-void Algorithms::getSingleNumFromStr(const string& str, int& num)
+void Algorithms::GetSingleNumFromStr(const string& str, int& num)
 {
 	char* token;
 	char deli[4] = " \n\t";
@@ -137,7 +137,7 @@ void Algorithms::getSingleNumFromStr(const string& str, int& num)
 	num = Algorithms::MyAtoi(token);
 }
 
-void Algorithms::getEdgeFromStr(const string& str, Edge& e , bool isLastIteration)
+void Algorithms::GetEdgeFromStr(const string& str, Edge& e , bool isLastIteration)
 {
 	char* token1, * token2, * token3;
 	char deli[4] = " \n\t";
