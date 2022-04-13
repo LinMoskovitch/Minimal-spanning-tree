@@ -7,7 +7,7 @@ public:
 	static vector<Edge> Kruskal(Graph& graph);
 	static vector<Edge> Prim(Graph graph);
 
-	static Graph getGraphFromFile(ifstream& is, Edge& toRemove);
+	static Edge getEdgeToRemoveAndGraphFromFile(ifstream& is, Graph& graph);
 	static void getSingleNumFromStr(const string& str, int& num);
 	static void getEdgeFromStr(const string& str, Edge& e, bool isLastIteration);
 	static int MyAtoi(char* str);

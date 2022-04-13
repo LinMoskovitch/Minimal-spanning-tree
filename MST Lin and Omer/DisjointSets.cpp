@@ -2,13 +2,7 @@
 
 DisjointSets::DisjointSets(const Graph& graph)
 {
-	A.resize(graph.GetNumOfVertex());
-
-	for (int i = 0; i < graph.GetNumOfVertex(); ++i)
-	{
-		A.at(i).parent = -1;
-		A.at(i).sizeOfThree = 0;
-	}
+	A.assign(graph.GetNumOfVertex() + 1, { -1,0 });
 }
 
 void DisjointSets::MakeSet(const Vertex x)

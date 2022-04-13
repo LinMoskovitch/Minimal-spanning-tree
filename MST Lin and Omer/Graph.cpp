@@ -3,7 +3,7 @@
 
 Graph::Graph(Vertex n, Edges m) : n(n), m(m)
 {
-	MakeEmptyGraph();
+	MakeEmptyGraph(n, m);
 }
 
 Graph::~Graph()
@@ -16,8 +16,10 @@ Graph::~Graph()
 	}
 }
 
-void Graph::MakeEmptyGraph()
+void Graph::MakeEmptyGraph(Vertex n, Edges m)
 {
+	this->n = n;
+	this->m = m;
 	for (int i = 0; i <= n; ++i)
 	{
 		GraphVertex newVertex;

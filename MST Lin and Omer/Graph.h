@@ -33,10 +33,10 @@ private:
 
 public:
 
-	Graph(Vertex n, Edges m);
+	Graph(Vertex n = 0, Edges m = 0);
 	~Graph();
 
-	void MakeEmptyGraph();
+	void MakeEmptyGraph(Vertex n, Edges m);
 	bool IsAdjacent(Vertex u, Vertex v) const;
 	List* GetAdjList(Vertex u);
 	void AddEdge(Vertex u, Vertex v, Weight w);

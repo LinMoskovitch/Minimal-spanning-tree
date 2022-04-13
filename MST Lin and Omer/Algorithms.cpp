@@ -16,7 +16,7 @@ vector<Edge> Algorithms::Kruskal(Graph& graph)
 	vector<Edge> edgesArray = graph.getEdgeArray();
     DisjointSets UF(graph);
     QuickSort(edgesArray, 0, edgesArray.size() - 1);
-    for (int i = 0; i < graph.GetNumOfVertex(); ++i)
+    for (int i = 1; i <= graph.GetNumOfVertex(); ++i)
     {
         UF.MakeSet(i);
     }
@@ -86,7 +86,7 @@ void Algorithms::edgeSwap(Edge& src, Edge& dest)
 	src = dest;
 	dest = tmp;
 }
-Graph Algorithms::getGraphFromFile(ifstream& is, Edge& toRemove)
+Edge Algorithms::getEdgeToRemoveAndGraphFromFile(ifstream& is, Graph& graph)
 {
 	string str;
 	Edge tmpEdge;
@@ -95,12 +95,12 @@ Graph Algorithms::getGraphFromFile(ifstream& is, Edge& toRemove)
 	getSingleNumFromStr(str, n); // number of vertecies
 	getline(is, str);
 	getSingleNumFromStr(str, m);	// number of edges
-	Graph graph(n, m);
+	graph.MakeEmptyGraph(n,m);
 	bool isLastIteration = false;
 	for (int i = 0; i < m; ++i)
 	{
 		getline(is, str);
-		getEdgeFromStr(str, tmpEdge, false);
+		getEdgeFromStr(str, tmpEdge, isLastIteration);
 		if (tmpEdge.first_vertex == tmpEdge.second_vertex)
 		{
 			cout << "Invalid edge!";
@@ -114,11 +114,14 @@ Graph Algorithms::getGraphFromFile(ifstream& is, Edge& toRemove)
 	isLastIteration = true;
 	getline(is, str);
 	getEdgeFromStr(str, tmpEdge, isLastIteration);
-	toRemove.first_vertex = tmpEdge.first_vertex;
-	toRemove.second_vertex = tmpEdge.second_vertex;
-	toRemove.weight = 0;
 
-	return graph;
+	if (!graph.IsAdjacent(tmpEdge.first_vertex, tmpEdge.second_vertex))
+	{
+		cout << "edge to remove is not in the graph!";
+		exit(1);
+	}
+
+	return {tmpEdge.first_vertex, tmpEdge.second_vertex, 0};
 }
 
 void Algorithms::getSingleNumFromStr(const string& str, int& num)
