@@ -21,7 +21,6 @@ int main(int argc, char** argv)
 	Graph graph(0,0);
 	Edge toRemove = Algorithms::getEdgeToRemoveAndGraphFromFile(inputFile, graph);
 	inputFile.close();
-
 	Kruskal = Algorithms::Kruskal(graph);
 	//Prim = Algorithms::Prim(graph);
 	Algorithms::CalculateMSTWeight("Kruskal", Kruskal, outputFile);

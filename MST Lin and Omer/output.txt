@@ -1,1 +1,1 @@
-Kruskal's: 62
+Kruskal's: 43

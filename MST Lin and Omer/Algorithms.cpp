@@ -28,7 +28,7 @@ vector<Edge> Algorithms::Kruskal(Graph& graph)
         if (uTmp != vTmp)
         {
             edgeSet.push_back(edge);
-            UF.Union(edge.first_vertex, edge.second_vertex);
+            UF.Union(uTmp, vTmp);
         }
     }
     return edgeSet;

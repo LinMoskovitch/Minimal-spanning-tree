@@ -18,7 +18,7 @@ Vertex DisjointSets::Find(Vertex x)
 		return x;
 	}
 
-	return (A.at(x).parent == Find(A.at(x).parent));
+	return (A.at(x).parent = Find(A.at(x).parent));
 }
 
 void DisjointSets::Union(Vertex repX, Vertex repY)
