@@ -22,9 +22,9 @@ int main(int argc, char** argv)
 	Edge toRemove = Algorithms::GetEdgeToRemoveAndGraphFromFile(inputFile, graph);
 	inputFile.close();
 	Kruskal = Algorithms::Kruskal(graph);
-	//Prim = Algorithms::Prim(graph);
+	Prim = Algorithms::Prim(graph);
 	Algorithms::CalculateMSTWeight("Kruskal", Kruskal, outputFile);
-	//Algorithms::CalculateMSTWeight("Prim", Prim, outputFile);
+	Algorithms::CalculateMSTWeight("Prim", Prim, outputFile);
 
 	/*graph.RemoveEdge(toRemove.first_vertex, toRemove.second_vertex);
 	Algorithms::Kruskal(graph);

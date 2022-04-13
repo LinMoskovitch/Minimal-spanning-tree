@@ -116,3 +116,13 @@ void MinHeap::DecreaseKey(const int node)
 		DecreaseKey(parent);
 	}
 }
+
+int MinHeap::GetLengthFromTree(Vertex vertex_name)
+{
+	return dataArr.at(vertex_name).length_from_tree;
+}
+
+void MinHeap::SetLengthFromTree(Vertex vertex_name, int new_length)
+{
+	dataArr.at(vertex_name).length_from_tree = new_length;
+}

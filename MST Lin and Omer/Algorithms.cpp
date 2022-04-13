@@ -34,20 +34,41 @@ vector<Edge> Algorithms::Kruskal(Graph& graph)
     return edgeSet;
 }
 
-vector<Edge> Algorithms::Prim(Graph graph)
+vector<Edge> Algorithms::Prim(Graph& graph)
 {
-	vector<Edge> weights;
-	Edge tmp;
-    MinHeap Q;
-    vector<bool> inT ={false};
-    vector<Weight> min;
+	vector<Vertex> p;
+	vector<Edge> edgeSet;
+	MinHeap Q(graph, 1);
+    vector<bool> inT;
+	inT.assign(graph.GetNumOfVertex() + 1, false);
+	p.resize(graph.GetNumOfVertex() + 1);
 
-    min.resize(graph.GetNumOfVertex());
-    min.at(0) = 0;
-	weights.push_back(tmp);
+	for (int i = 1; i <= graph.GetNumOfVertex(); ++i)
+	{
+		p.at(i) = -1;
+	}
 
-
-	return weights;
+	while (!Q.IsEmpty())
+	{
+		HeapNode u = Q.DeleteMin();
+		if (p.at(u.vertex_name) != 1)
+			edgeSet.push_back({ u.vertex_name,p.at(u.vertex_name),u.length_from_tree });
+		inT.at(u.vertex_name) = true;
+		const List* neighbors = graph.getVerteciesArray().at(u.vertex_name).neighbors;
+		ListNode* curr = neighbors->GetHead();
+		while (curr != nullptr)
+		{
+			int currInHeap = *(graph.getVerteciesArray().at(curr->vertex_name).location_in_heap);
+			if (inT.at(curr->vertex_name) == false && curr->weight < Q.GetLengthFromTree(currInHeap))
+			{
+				Q.SetLengthFromTree(currInHeap, curr->weight);
+				p.at(curr->vertex_name) = u.vertex_name;
+				Q.DecreaseKey(currInHeap);
+			}
+			curr = curr->next;
+		}
+	}
+	return edgeSet;
 }
 
 

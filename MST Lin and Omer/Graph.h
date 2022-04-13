@@ -21,6 +21,10 @@ typedef struct Edge
 		weight = a.weight;
 		return *this;
 	}
+	Edge& operator=(nullptr_t)
+	{
+		*this = nullptr;
+	}
 }Edge;
 
 class Graph

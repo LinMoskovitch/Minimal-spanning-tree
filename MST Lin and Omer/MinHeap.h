@@ -4,7 +4,7 @@
 typedef struct HeapNode
 {
 	int length_from_tree;
-	int vertex_name;
+	Vertex vertex_name;
 	int* location;
 }HeapNode;
 
@@ -33,4 +33,6 @@ public:
 	void MakeEmpty();
 	bool IsEmpty() const;
 	void DecreaseKey(const int node);
+	int GetLengthFromTree(Vertex vertex_name);
+	void SetLengthFromTree(Vertex vertex_name, int new_length);
 };

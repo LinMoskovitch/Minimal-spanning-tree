@@ -1,1 +1,2 @@
 Kruskal's: 43
+Prim's: 30

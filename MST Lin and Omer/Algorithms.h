@@ -5,7 +5,7 @@ class Algorithms
 public:
 	static void QuickSort(vector<Edge>& edgesArray, int left, int right);
 	static vector<Edge> Kruskal(Graph& graph);
-	static vector<Edge> Prim(Graph graph);
+	static vector<Edge> Prim(Graph& graph);
 
 	static Edge GetEdgeToRemoveAndGraphFromFile(ifstream& is, Graph& graph);
 	static void GetSingleNumFromStr(const string& str, int& num);
