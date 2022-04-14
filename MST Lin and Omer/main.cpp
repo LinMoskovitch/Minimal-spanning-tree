@@ -30,13 +30,22 @@ void main(int argc, char** argv)
 		cout << "File corrupt or not found!";
 		exit(1);
 	}
+
 	Graph graph(0, 0);
 	Edge toRemove = Algorithms::GetEdgeToRemoveAndGraphFromFile(inputFile, graph);
 	inputFile.close();
+
 	Kruskal = Algorithms::Kruskal(graph,false);
+	if (Kruskal.size() < graph.GetNumOfVertex() - 1)
+	{
+		cout << "Not a linked graph!";
+		exit(1);
+	}
 	Prim = Algorithms::Prim(graph);
+
 	Algorithms::CalculateMSTWeight("Kruskal", Kruskal, outputFile);
 	Algorithms::CalculateMSTWeight("Prim", Prim, outputFile);
+
 	graph.RemoveEdge(toRemove.first_vertex, toRemove.second_vertex);
 	Kruskal = Algorithms::Kruskal(graph,true);
 	if (Kruskal.size() < graph.GetNumOfVertex() - 1) // check if the removed edge is a bridge.
